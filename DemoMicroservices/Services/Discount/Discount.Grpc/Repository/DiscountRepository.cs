@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using Discount.API.Entities;
-using Discount.API.Interfaces;
+using Discount.Grpc.Entities;
+using Discount.Grpc.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Discount.API.Repository
+namespace Discount.Grpc.Repository
 {
     public class DiscountRepository:IDiscount
     {

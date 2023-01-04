@@ -10,12 +10,12 @@ service DiscountProtoService {
 }
 
 message GetDiscountRequest {
-	string productName=1;
+	string productname=1;
 }
 
 message CouponModel {
-	int32 id = 1;
-	string productName=2;
+	int32 id=1;
+	string productname=2;
 	string description=3;
 	int32 amount=4;
 }
@@ -29,7 +29,7 @@ message UpdateDiscountRequest {
 }
 
 message DeleteDiscountRequest {
-	string productName = 1;
+	string productname = 1;
 }
 
 message DeleteDiscountResponse {

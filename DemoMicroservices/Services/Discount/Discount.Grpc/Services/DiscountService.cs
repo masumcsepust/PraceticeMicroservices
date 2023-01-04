@@ -12,10 +12,10 @@ namespace Discount.Grpc.Services
     public class DiscountService: DiscountProtoService.DiscountProtoServiceBase
     {
         private readonly IDiscount _discount;
-        private readonly ILogger _logger;
+        private readonly ILogger<DiscountService> _logger;
         private readonly IMapper _mapper;
 
-        public DiscountService(IDiscount discount, ILogger logger, IMapper mapper)
+        public DiscountService(IDiscount discount, ILogger<DiscountService> logger, IMapper mapper)
         {
             _discount = discount ?? throw new ArgumentNullException(nameof(discount));
             _logger = logger ?? throw new ArgumentNullException(nameof(discount));
@@ -24,11 +24,11 @@ namespace Discount.Grpc.Services
 
         public override async Task<CouponModel> GetDiscount(GetDiscountRequest request, ServerCallContext context)
         {
-            var coupon = await _discount.GetDiscount(request.ProductName);
+            var coupon = await _discount.GetDiscount(request.Productname);
 
             if(coupon == null)
             {
-                throw new RpcException(new Status(StatusCode.NotFound, $"Discount With ProductName={request.ProductName} is not found."));
+                throw new RpcException(new Status(StatusCode.NotFound, $"Discount With ProductName={request.Productname} is not found."));
             }
 
             var couponModel = _mapper.Map<CouponModel>(coupon);
@@ -66,7 +66,7 @@ namespace Discount.Grpc.Services
 
         public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
         {
-            var deleted = await _discount.DeleteDiscount(request.ProductName);
+            var deleted = await _discount.DeleteDiscount(request.Productname);
 
             var response = new DeleteDiscountResponse
             {
